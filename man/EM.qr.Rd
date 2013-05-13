@@ -1,17 +1,19 @@
 \name{EM.qr}
 \alias{EM.qr}
-\title{Algorithm EM for Quantile Regression }
-\description{Return estimating the parameters in a quantile regression using EM algorithm.}
+\title{Quantile Regression Using Asymmetric Laplace Distribution}
+\description{Return estimating the parameters in a quantile regression}
+
 \usage{
-EM.qr(y, x = NULL, perc = NULL, error = 0.000001 , iter = 2000)
+EM.qr(y, x = NULL, perc = NULL, error = 0.000001 , iter = 2000, envelope=FALSE)
 }
 
 \arguments{
   \item{y}{vector of responses}
-  \item{x}{matrix of observations}
-  \item{perc}{Quantile}
-  \item{error}{the covergence maximum erro}
-  \item{iter}{maximum iterations of the EM algorithm}
+  \item{x}{the design matrix}
+  \item{perc}{the quantile to be estimated, this is generally a number strictly between 0 and 1.}
+  \item{error}{the covergence maximum error}
+  \item{iter}{maximum iterations of the EM algorithm.}
+  \item{envelope}{confidence envelopes for a curve based on bootstrap replicates }
 }
 
 \value{Estimated of parameters a quantile regression fit, erro standar, log-likelihood}

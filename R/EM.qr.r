@@ -6,8 +6,54 @@
 ###                    Iniciando o ALgoritmo EM
 ################################################################################
   
-  
-  EM.qr<-function(y,x=NULL,perc=NULL, error = 0.000001 ,iter=2000){
+
+  EM.qr<-function(y,x=NULL,perc=NULL, error = 0.000001 ,iter=2000, envelope=FALSE){
+    
+    #############################################################
+    ###               ENVELOPES: Bootstrap                    ###
+    #############################################################
+    
+    if(envelope==TRUE){
+      n <-length(y)
+      
+      #### Regressao Quantilica: Envelope   \rho_p(y-mu)/sigma^2 \sim exp(1)
+      #perc<-0.5
+      rq<-EM.qr(y,x,perc)
+      
+      d2s<-(y-x%*%rq$theta[1:3])/(rq$theta[4])   ### Distancia de mahalobonisb
+      d2s=sort(d2s)
+      
+      xq2 <- qchisq(ppoints(n), 1)
+      
+      Xsim<-matrix(0,100,n)
+      for(i in 1:100){
+        Xsim[i,]<-rchisq(n, 1)
+      }
+      
+      Xsim2<-apply(Xsim,1,sort)
+      d21<-matrix(0,n,1)
+      d22<-matrix(0,n,1)
+      for(i in 1:n){
+        d21[i]  <- quantile(Xsim2[i,],0.05)
+        d22[i]  <- quantile(Xsim2[i,],0.95)
+      }
+      
+      d2med <-apply(Xsim2,1,mean)
+      
+      fy <- range(d2s,d21,d22)
+      plot(xq2,d2s,xlab = expression(paste("Theoretical ",chi^2, " quantiles")),
+           ylab="Sample values and simulated envelope",pch=20,ylim=fy)
+      par(new=T)
+      plot(xq2,d21,type="l",ylim=fy,xlab="",ylab="")
+      par(new=T)
+      plot(xq2,d2med,type="l",ylim=fy,xlab="",ylab="")
+      par(new=T)
+      plot(xq2,d22,type="l",ylim=fy,xlab="",ylab="")
+    }
+    
+    
+    
+    
     ################################################################################
     ###                    MI Empirica: Veja givens
     ################################################################################
