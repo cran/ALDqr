@@ -118,7 +118,7 @@ EM.qr<-function(y,x=NULL,tau=NULL, error = 0.000001 ,iter=2000, envelope=FALSE){
   
   p <- ncol(x)
   n <- nrow(x)
-  reg <- fastLm(y ~ x[,2:p])
+  reg <- lm(y ~ x[,2:p])
   taup2<- (2/(tau*(1-tau)))
   thep<-(1-2*tau)/(tau*(1-tau))
   #Inicializa beta e sigma2 com os estimadores de m?nimos quadrados

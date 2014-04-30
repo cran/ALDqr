@@ -18,7 +18,7 @@ EM.qr(y, x = NULL, tau = NULL, error = 0.000001 , iter = 2000, envelope=FALSE)
 
 \value{Estimated parameter for a quantile regression fit,standard error, log-likelihood.}
 
-\author{Luis Benites Sanchez \email{lsanchez@ime.unicamp.br},Victor Hugo Lachos \email{hlachos@ime.unicamp.br}}
+\author{Luis Benites Sanchez \email{lsanchez@ime.usp.br},Victor Hugo Lachos \email{hlachos@ime.unicamp.br}}
 
 
 \references{
@@ -31,21 +31,21 @@ EM.qr(y, x = NULL, tau = NULL, error = 0.000001 , iter = 2000, envelope=FALSE)
 
 \examples{
 
-## Not run:
+
 ##Load the data
 data(ais)
 attach(ais)
 
 ##Set initial values
-y<-bmi
-sexInd<-(sex=="female")+0
-x<-cbind(1,lbm,sexInd)
+y<-BMI
+sexInd<-(Sex==1)+0
+x<-cbind(1,LBM,sexInd)
 tau<-0.5
 
 ## EM.qr
 EM.qr(y, x , tau = 0.5, error = 0.000001 , iter = 2000, envelope=FALSE)
 
-## End(Not run)
+
 }
 
 \keyword{regression}
