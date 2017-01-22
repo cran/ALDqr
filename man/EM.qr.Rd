@@ -18,8 +18,7 @@ EM.qr(y, x = NULL, tau = NULL, error = 0.000001 , iter = 2000, envelope=FALSE)
 
 \value{Estimated parameter for a quantile regression fit,standard error, log-likelihood.}
 
-\author{Luis Benites Sanchez \email{lsanchez@ime.usp.br},Victor Hugo Lachos \email{hlachos@ime.unicamp.br}}
-
+\author{Luis Benites Sanchez \email{lbenitesanchez@gmail.com}, Christian E. Galarza \email{cgalarza88@gmail.com}, Victor Hugo Lachos \email{hlachos@ime.unicamp.br}}
 
 \references{
 [1] Koenker, R. W. (2005). Quantile Regression, Cambridge U. Press.
@@ -30,20 +29,15 @@ EM.qr(y, x = NULL, tau = NULL, error = 0.000001 , iter = 2000, envelope=FALSE)
 }
 
 \examples{
-
-
-##Load the data
-data(ais)
+data(ais, package="sn")
 attach(ais)
-
-##Set initial values
-y<-BMI
-sexInd<-(Sex==1)+0
-x<-cbind(1,LBM,sexInd)
-tau<-0.5
+sexInd <- (sex=="female") + 0
+x      <- cbind(1,LBM,sexInd)
+y      <- BMI
+tau    <- 0.5
 
 ## EM.qr
-EM.qr(y, x , tau = 0.5, error = 0.000001 , iter = 2000, envelope=FALSE)
+EM.qr(y,x,tau)
 
 
 }
